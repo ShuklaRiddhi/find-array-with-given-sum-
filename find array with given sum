@@ -1,0 +1,45 @@
+Given an array arr[] of non-negative integers and an integer sum, find a subarray that adds up to the given sum. There may be more than one subarray with the sum equal to the given sum,
+but you need to print the first such subarray.
+ SOLUTION:-
+ import java.util.*;
+public class SubarrayWithGivenSum {
+
+    public static void findSubarray(int[] arr, int sum) {
+        int n = arr.length;
+        int currentSum = 0;
+        int start = 0;
+
+        for (int end = 0; end < n; end++) {
+            currentSum += arr[end];
+
+
+            while (currentSum > sum && start <= end) {
+                currentSum -= arr[start];
+                start++;
+            }
+
+            
+            if (currentSum == sum) {
+                System.out.println("Subarray found from index " + start + " to " + end);
+                System.out.print("Subarray elements: ");
+                for (int i = start; i <= end; i++) {
+                    System.out.print(arr[i] + " ");
+                }
+                System.out.println();
+                return;
+            }
+        }
+
+       
+        System.out.println("No subarray found with sum equal to " + sum);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 1, 4, 20, 3, 10, 5 };
+        int sum = 33;
+        findSubarray(arr, sum);
+    }
+}
+
+
+
